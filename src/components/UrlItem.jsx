@@ -9,22 +9,29 @@ export default function UrlItem({ item }) {
         navigate(pages.urlItem + urlId)
     };
 
+    function removeItem(itemId) {
+        alert(`Esta removendo o id ${itemId}`)
+    }
+
     return (
-        <ProductBox onClick={() => openUrlId(item.id)}>
-            <TextBox>
+        <ProductBox>
+            <TextBox onClick={() => openUrlId(item.id)}>
                 <div>idddd: {item.id}</div>
                 <div>shortUrl: {item.shortUrl}</div>
                 <div>url: {item.url}</div> 
                 <div>visitCount: {item.visitCount}</div>
             </TextBox>
+                <button onClick={() => removeItem(item.id)}>remover</button>
         </ProductBox>
     )
 }
 
 const ProductBox = styled.div`
 border: 1px solid black;
+margin-bottom: 25px;
 `
 
 const TextBox = styled.div`
     font-size: 4.0vw;
+border: 1px solid red;
 `
