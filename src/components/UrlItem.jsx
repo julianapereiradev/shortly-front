@@ -1,16 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components"
-import { pages } from "../routes/routes";
+import { headersAuth, pages } from "../routes/routes";
+import axios from "axios";
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 
 export default function UrlItem({ item }) {
+    const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     function openUrlId(urlId) {
         navigate(pages.urlItem + urlId)
     };
 
-    function removeItem(itemId) {
-        alert(`Esta removendo o id ${itemId}`)
+    async function removeItem(itemId) {
+        try {
+            const headers = headersAuth(user?.token);
+            await axios.delete(`http://localhost:5000/urls/${itemId}`, headers);
+            alert(`Removendo o id ${itemId}`);
+            window.location.reload(); // This will reload the page to reflect the updated list
+        } catch (error) {
+            console.error("Error deleting item:", error);
+        }
     }
 
     return (
