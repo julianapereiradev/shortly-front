@@ -1,4 +1,28 @@
 export const pages = {
     signIn: '/',
     signUp: '/cadastro',
+    home: '/home',
+    urlItem: '/urlId/',
+}
+
+const API_URL = 'http://localhost:5000';
+// const API_URL = 'https://shortlydb.onrender.com';
+
+export const requisitions = {
+    postSignUp: API_URL + '/signup',
+    postSignIn: API_URL + '/signin',
+    getUserMe: API_URL + '/users/me',
+    getUrlById: API_URL + '/urls/',
+    deleteUrlById: API_URL + '/urls/'
+}
+
+export function headersAuth(token) {
+    if (!token && localStorage.user) {
+        const user = JSON.parse(localStorage.user);
+        token = user.token;
+    }
+
+    return {headers: {
+        'Authorization': `Bearer ${token}`
+    }}
 }
