@@ -14,7 +14,8 @@ export const requisitions = {
     getUserMe: API_URL + '/users/me',
     getUrlById: API_URL + '/urls/',
     deleteUrlById: API_URL + '/urls/',
-    postUrl: API_URL + '/urls/shorten'
+    postUrl: API_URL + '/urls/shorten',
+    redirectUrl: API_URL + '/urls/open/'
 }
 
 export function headersAuth(token) {

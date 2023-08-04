@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components"
-import { headersAuth, pages } from "../routes/routes";
+import { headersAuth, pages, requisitions } from "../routes/routes";
 import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
@@ -8,9 +8,23 @@ import AuthContext from "../contexts/AuthContext";
 export default function UrlItem({ item }) {
     const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { shortUrl } = useParams();
 
     function openUrlId(urlId) {
         navigate(pages.urlItem + urlId)
+    };
+
+    function redirectItem(shortUrl) {
+        axios
+        .get(requisitions.redirectUrl + shortUrl, headersAuth(user.token))
+        .then((res) => {
+            console.log(res)
+            window.location.reload();
+        })
+        .catch((erro) => {
+        //    alert(erro.response.data.message)
+        console.log('errro',erro)
+        });
     };
 
     async function removeItem(itemId) {
@@ -18,7 +32,7 @@ export default function UrlItem({ item }) {
             const headers = headersAuth(user?.token);
             await axios.delete(`http://localhost:5000/urls/${itemId}`, headers);
             alert(`Removendo o id ${itemId}`);
-            window.location.reload(); // This will reload the page to reflect the updated list
+            window.location.reload();
         } catch (error) {
             console.error("Error deleting item:", error);
         }
@@ -32,6 +46,7 @@ export default function UrlItem({ item }) {
                 <div>url: {item.url}</div> 
                 <div>visitCount: {item.visitCount}</div>
             </TextBox>
+                <button onClick={() => redirectItem(item.shortUrl)}>ir direto para o link</button>
                 <button onClick={() => removeItem(item.id)}>remover</button>
         </ProductBox>
     )
