@@ -29,7 +29,8 @@ export default function HomePage() {
       })
       .catch((erro) => {
         navigate(pages.signIn);
-        alert(erro.response.data.message);
+        // alert(erro.response.data.message);
+        console.log('erro aqui de get:', erro)
       });
   }, [user]);
 
@@ -48,6 +49,7 @@ export default function HomePage() {
       })
       .catch((error) => {
         alert(error.response.data);
+        console.log('erro aqui:', error)
         setDisable(false);
       });
   }
@@ -76,14 +78,7 @@ export default function HomePage() {
               myurls.shortenedUrls.map((item) => (
                 <UrlItem key={item.id} item={item} />
               ))
-            ) : (
-              <ThreeDots
-                type="ThreeDots"
-                color="#000000"
-                height={90}
-                width={150}
-              />
-            )}
+            ) : ('Você não possui urls')}
           </div>
         </HomeBox>
       </HomeContainer>

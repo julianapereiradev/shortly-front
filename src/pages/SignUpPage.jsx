@@ -77,7 +77,7 @@ export default function SignUpPage() {
           />
 
           <input
-            type="confirmpassword"
+            type="password"
             placeholder="Confirmar senha"
             autoComplete="confirm-password"
             required
