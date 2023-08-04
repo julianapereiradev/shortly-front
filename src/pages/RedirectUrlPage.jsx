@@ -31,12 +31,7 @@ export default function RedirectUrlPage() {
         <UrlContainer>
           <Header />
              <div>Redirecionando</div>
-             {redirectUrl ? (
-                <div>
-                <div>Id:{redirectUrl.id}</div>
-                <div>shortUrl:{redirectUrl.shortUrl}</div>
-                </div>
-        ) : (
+             {redirectUrl ? ('Redireciona..') : (
           <ThreeDots type="ThreeDots" color="#000000" height={90} width={150} />
         )}
         </UrlContainer>

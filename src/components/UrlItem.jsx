@@ -18,12 +18,17 @@ export default function UrlItem({ item }) {
         navigate(pages.redirect + redirect)
     };
 
+    // function openRedirectUrl(redirect) {
+    //     window.open(redirect);
+    //   }
+      
+
     // function redirectItem(shortUrl) {
     //     axios
-    //     .get(requisitions.redirectUrl + shortUrl, headersAuth(user.token))
+    //     .get(`http://localhost:5000/urls/open/${shortUrl}`)
     //     .then((res) => {
     //         console.log(res)
-    //         window.location.reload();
+    //         // openRedirectUrl(res)
     //     })
     //     .catch((erro) => {
     //     console.log('errro',erro)
@@ -49,6 +54,7 @@ export default function UrlItem({ item }) {
                 <div>visitCount: {item.visitCount}</div>
             </TextBox>
                 <button onClick={() => openRedirectUrl(item.shortUrl)}>ir direto para o link</button>
+                {/* <button onClick={() => redirectItem(item.shortUrl)}>irr direto para o link</button> */}
                 <button onClick={() => removeItem(item.id)}>remover</button>
         </ProductBox>
     )
