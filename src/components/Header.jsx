@@ -19,18 +19,32 @@ export default function Header() {
 
     localStorage.removeItem('user');
     setUser(0);
-    navigate(pages.signIn)
+    setUserName(0)
+    navigate(pages.ranking)
   }
 
   return (
     <ContainerHeader>
-      <h1>{userName}</h1>
-      <button onClick={() => navigate(pages.home)}>Home</button>
-      <h1>LOGO SHORTLY</h1>
-      <h2>rota de ranking</h2>
-      <div>
-        <button onClick={() => logout()}>Sair</button>
-      </div>
+{user ? (
+   <>
+   <h1>{userName}</h1>
+   <button onClick={() => navigate(pages.home)}>Home</button>
+   <button onClick={() => navigate(pages.ranking)}>Ranking</button>
+   <h1>LOGO SHORTLYYY</h1>
+   <h2>rota de ranking</h2>
+   <div>
+  <button onClick={() => logout()}>Sair</button>
+  </div>
+  </>) : 
+  (
+    <>
+    <button onClick={() => navigate(pages.signIn)}>Entrar</button>
+    <button onClick={() => navigate(pages.signUp)}>Cadastrar</button>
+    <h1>LOGO SHORTLY</h1>
+    <h2>rota de ranking</h2>
+   </>
+  )}
+     
     </ContainerHeader>
   )
 }

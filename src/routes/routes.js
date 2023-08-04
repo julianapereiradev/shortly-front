@@ -1,8 +1,9 @@
 export const pages = {
-    signIn: '/',
+    signIn: '/login',
     signUp: '/cadastro',
     home: '/home',
     urlItem: '/urlId/',
+    ranking: '/'
 }
 
 const API_URL = 'http://localhost:5000';
@@ -17,6 +18,8 @@ export const requisitions = {
     postUrl: API_URL + '/urls/shorten',
     redirectUrl: API_URL + '/urls/open/',
     logout: API_URL + '/logout',
+    getRanking: API_URL + '/ranking'
+
 }
 
 export function headersAuth(token) {
