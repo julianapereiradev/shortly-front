@@ -13,7 +13,8 @@ export const requisitions = {
     postSignIn: API_URL + '/signin',
     getUserMe: API_URL + '/users/me',
     getUrlById: API_URL + '/urls/',
-    deleteUrlById: API_URL + '/urls/'
+    deleteUrlById: API_URL + '/urls/',
+    postUrl: API_URL + '/urls/shorten'
 }
 
 export function headersAuth(token) {

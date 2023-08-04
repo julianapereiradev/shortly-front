@@ -15,6 +15,8 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const [myurls, setMyUrls] = useState(undefined);
+  const [extendUrl, setExtendUrl] = useState('');
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     validateUser(user, setUser);
@@ -22,17 +24,48 @@ export default function HomePage() {
     axios
       .get(requisitions.getUserMe, headersAuth(user.token))
       .then((res) => setMyUrls(res.data))
-      .catch((error) => {
+      .catch((erro) => {
         navigate(pages.signIn);
-        alert(error.response.data);
+         alert(erro.response.data.message)
       });
   }, [user]);
 
-  console.log('myUrls', myurls)
+  function postUrlLink(e) {
+    e.preventDefault();
+    setDisable(true);
+
+    const informations = { url: extendUrl }
+
+    axios.post(requisitions.postUrl, informations, headersAuth(user.token))
+        .then(resp => {
+            console.log(resp.data)
+            window.location.reload();
+            setDisable(false);
+        })
+        .catch(error => {
+            alert(error.response.data);
+            setDisable(false);
+        })
+}
+  
 
   return (
     <HomeContainer>
         <h1>Pagina Inicial</h1>
+        <InputStyle>
+           <h1>ADD URL:</h1>
+           <input
+              size={30}
+              type="url"
+              autoComplete="url"
+              placeholder="Links que cabem no bolso"
+              required
+              disabled={disable}
+              value={extendUrl}
+              onChange={(e) => setExtendUrl(e.target.value)}
+            />
+            <button onClick={postUrlLink}>Encurtar link</button>
+        </InputStyle>
         <div>
           {myurls ? (myurls.shortenedUrls.map(item => <UrlItem key={item.id} item={item} />)) : (
             <ThreeDots type="ThreeDots" color="#F6E4C4" height={90} width={150} />
@@ -45,4 +78,7 @@ export default function HomePage() {
 
 const HomeContainer = styled.div`
   height: 100vh;
+`
+const InputStyle = styled.div`
+  border: 3px solid blue;
 `
