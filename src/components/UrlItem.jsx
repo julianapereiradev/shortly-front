@@ -22,7 +22,6 @@ export default function UrlItem({ item }) {
             window.location.reload();
         })
         .catch((erro) => {
-        //    alert(erro.response.data.message)
         console.log('errro',erro)
         });
     };
@@ -30,7 +29,7 @@ export default function UrlItem({ item }) {
     async function removeItem(itemId) {
         try {
             const headers = headersAuth(user?.token);
-            await axios.delete(`http://localhost:5000/urls/${itemId}`, headers);
+            await axios.delete(requisitions.deleteUrlById + itemId, headers);
             window.location.reload();
         } catch (error) {
             console.error("Error deleting item:", error);
