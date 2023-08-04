@@ -8,7 +8,7 @@ import AuthContext from "../contexts/AuthContext";
 export default function UrlItem({ item }) {
     const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { shortUrl } = useParams();
+
 
     function openUrlId(urlId) {
         navigate(pages.urlItem + urlId)
@@ -31,7 +31,6 @@ export default function UrlItem({ item }) {
         try {
             const headers = headersAuth(user?.token);
             await axios.delete(`http://localhost:5000/urls/${itemId}`, headers);
-            alert(`Removendo o id ${itemId}`);
             window.location.reload();
         } catch (error) {
             console.error("Error deleting item:", error);

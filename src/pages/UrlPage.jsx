@@ -6,6 +6,7 @@ import { validateUser } from "../constants/functions";
 import axios from "axios";
 import { headersAuth, pages, requisitions } from "../routes/routes";
 import { ThreeDots } from "react-loader-spinner";
+import Header from "../components/Header";
 
 export default function UrlPage() {
     const { user, setUser } = useContext(AuthContext);
@@ -29,6 +30,7 @@ export default function UrlPage() {
 
     return (
         <UrlContainer>
+          <Header />
              <div>Pagina da Url Id</div>
              {urlItemId ? (
                 <div>

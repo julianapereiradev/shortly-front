@@ -7,10 +7,11 @@ import { headersAuth, pages, requisitions } from "../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import UrlItem from "../components/UrlItem";
+import Header from "../components/Header";
 
 
 export default function HomePage() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, userName, setUserName } = useContext(AuthContext);
   console.log("user em HomePage", user);
   const navigate = useNavigate();
 
@@ -23,7 +24,10 @@ export default function HomePage() {
 
     axios
       .get(requisitions.getUserMe, headersAuth(user.token))
-      .then((res) => setMyUrls(res.data))
+      .then((res) => {
+        setMyUrls(res.data);
+        setUserName(res.data.name)
+      })
       .catch((erro) => {
         navigate(pages.signIn);
          alert(erro.response.data.message)
@@ -51,7 +55,9 @@ export default function HomePage() {
 
   return (
     <HomeContainer>
+      <Header />
         <h1>Pagina Inicial</h1>
+        <h1>Bem vindo {userName}</h1>
         <InputStyle>
            <h1>ADD URL:</h1>
            <input

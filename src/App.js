@@ -10,10 +10,10 @@ import UrlPage from "./pages/UrlPage";
 
 export default function App() {
   const [user, setUser] = useState(0)
-
+  const [userName, setUserName] = useState('');
   return (
     <PagesContainer>
-      <AuthContext.Provider value={{user, setUser}}>
+      <AuthContext.Provider value={{user, setUser, userName, setUserName}}>
     <BrowserRouter>
     <Routes>
       <Route path={pages.signIn} element={ <SignInPage />} />
