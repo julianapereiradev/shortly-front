@@ -28,7 +28,7 @@ export default function Header() {
       {user ? (
         <>
           <ContainerMenu>
-            <h1>{userName}</h1>
+            <h1>Seja bem-vindo(a), {userName}!</h1>
             <ContainerButtons>
               <button onClick={() => navigate(pages.home)}>Home</button>
               <button onClick={() => navigate(pages.ranking)}>Ranking</button>
@@ -71,6 +71,7 @@ const ContainerMenu = styled.div`
   h1 {
     color: #5d9040;
     font-size: 14px;
+    font-weight: 600;
   }
 `;
 const ContainerButtons = styled.div`
@@ -81,14 +82,18 @@ const ContainerButtons = styled.div`
     color: #5d9040;
     font-size: 14px;
     font-weight: 600;
+
+    &:hover {
+      color: #9c9c9c;
+    }
   }
 `;
 
 const ContainerLogo = styled.header`
-display: flex;
-flex-direction: row;
-justify-content: center;
-margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
 
   img {
     width: 300px;

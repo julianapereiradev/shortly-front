@@ -2,6 +2,8 @@ import { useContext } from "react"
 import AuthContext from "../contexts/AuthContext"
 import Header from "../components/Header"
 import RankingTable from "../components/RankingTable"
+import RankingLogo from "../components/RankingLogo"
+import RankingNotLogged from "../components/RankingNotLogged"
 
 export default function RankingPage() {
 
@@ -9,11 +11,11 @@ export default function RankingPage() {
     
     return (
         <div>
-            <h1>Pagina de ranking</h1>
             {user ? 
             (
             <>
             <Header />
+            <RankingLogo />
             <RankingTable />
             </>
             )
@@ -21,8 +23,9 @@ export default function RankingPage() {
             (
             <>
             <Header />
+            <RankingLogo />
             <RankingTable />
-            <div>Crie uma conta para usar nosso serviço!</div>
+            <RankingNotLogged />
             </>
             )}
         </div>
