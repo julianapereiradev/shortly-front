@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom"
-import styled from "styled-components"
-import axios from "axios"
-import { useContext } from "react"
-import AuthContext from "../contexts/AuthContext"
-import { headersAuth, pages, requisitions } from "../routes/routes"
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import axios from "axios";
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
+import { headersAuth, pages, requisitions } from "../routes/routes";
+import logoinicio from "../images/logoinicio.png";
 
 export default function Header() {
-
-  const navigate = useNavigate()
-  const { user, setUser, userName, setUserName } = useContext(AuthContext)
+  const navigate = useNavigate();
+  const { user, setUser, userName, setUserName } = useContext(AuthContext);
 
   async function logout() {
     try {
@@ -17,38 +17,80 @@ export default function Header() {
       alert(error);
     }
 
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setUser(0);
-    setUserName(0)
-    navigate(pages.ranking)
+    setUserName(0);
+    navigate(pages.ranking);
   }
 
   return (
     <ContainerHeader>
-{user ? (
-   <>
-   <h1>{userName}</h1>
-   <button onClick={() => navigate(pages.home)}>Home</button>
-   <button onClick={() => navigate(pages.ranking)}>Ranking</button>
-   <h1>LOGO SHORTLYYY</h1>
-   <h2>rota de ranking</h2>
-   <div>
-  <button onClick={() => logout()}>Sair</button>
-  </div>
-  </>) : 
-  (
-    <>
-    <button onClick={() => navigate(pages.signIn)}>Entrar</button>
-    <button onClick={() => navigate(pages.signUp)}>Cadastrar</button>
-    <h1>LOGO SHORTLY</h1>
-    <h2>rota de ranking</h2>
-   </>
-  )}
-     
+      {user ? (
+        <>
+          <ContainerMenu>
+            <h1>{userName}</h1>
+            <ContainerButtons>
+              <button onClick={() => navigate(pages.home)}>Home</button>
+              <button onClick={() => navigate(pages.ranking)}>Ranking</button>
+              <button onClick={() => logout()}>Sair</button>
+            </ContainerButtons>
+          </ContainerMenu>
+          <ContainerLogo>
+            <img src={logoinicio} />
+          </ContainerLogo>
+        </>
+      ) : (
+        <>
+          <ContainerMenu>
+            <h1>{""}</h1>
+            <ContainerButtons>
+              <button onClick={() => navigate(pages.signIn)}>Entrar</button>
+              <button onClick={() => navigate(pages.signUp)}>Cadastrar</button>
+            </ContainerButtons>
+          </ContainerMenu>
+          <ContainerLogo>
+            <img src={logoinicio} />
+          </ContainerLogo>
+        </>
+      )}
     </ContainerHeader>
-  )
+  );
 }
 
-const ContainerHeader = styled.header` 
- border: 5px solid green
-`
+const ContainerHeader = styled.header`
+  height: 200px;
+  /* border: 1px solid green; */
+`;
+
+const ContainerMenu = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    color: #5d9040;
+    font-size: 14px;
+  }
+`;
+const ContainerButtons = styled.div`
+  button {
+    margin-left: 15px;
+    border: none;
+    background-color: #fff;
+    color: #5d9040;
+    font-size: 14px;
+    font-weight: 600;
+  }
+`;
+
+const ContainerLogo = styled.header`
+display: flex;
+flex-direction: row;
+justify-content: center;
+margin-top: 20px;
+
+  img {
+    width: 300px;
+  }
+`;

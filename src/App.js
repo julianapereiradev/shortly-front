@@ -32,5 +32,9 @@ export default function App() {
 }
 
 const PagesContainer = styled.main`
-  background-color: #ffffff;
+ background-color: #fff;
+ margin-left: 100px;
+ margin-right: 100px;
+ margin-top: 40px;
+ margin-bottom: 40px;
 `

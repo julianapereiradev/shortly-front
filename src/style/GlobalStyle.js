@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     * {
-        font-family: 'Courier New', Courier, monospace;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-style: normal;
         font-weight: 400;
         box-sizing: border-box;
@@ -10,6 +10,11 @@ const GlobalStyle = createGlobalStyle`
     body {
       background-color: #fff;
     }
+
+    button {
+        cursor: pointer;
+    }
+
 `
 
 export default GlobalStyle
