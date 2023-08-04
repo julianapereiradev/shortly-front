@@ -14,17 +14,21 @@ export default function UrlItem({ item }) {
         navigate(pages.urlItem + urlId)
     };
 
-    function redirectItem(shortUrl) {
-        axios
-        .get(requisitions.redirectUrl + shortUrl, headersAuth(user.token))
-        .then((res) => {
-            console.log(res)
-            window.location.reload();
-        })
-        .catch((erro) => {
-        console.log('errro',erro)
-        });
+    function openRedirectUrl(redirect) {
+        navigate(pages.redirect + redirect)
     };
+
+    // function redirectItem(shortUrl) {
+    //     axios
+    //     .get(requisitions.redirectUrl + shortUrl, headersAuth(user.token))
+    //     .then((res) => {
+    //         console.log(res)
+    //         window.location.reload();
+    //     })
+    //     .catch((erro) => {
+    //     console.log('errro',erro)
+    //     });
+    // };
 
     async function removeItem(itemId) {
         try {
@@ -44,7 +48,7 @@ export default function UrlItem({ item }) {
                 <div>url: {item.url}</div> 
                 <div>visitCount: {item.visitCount}</div>
             </TextBox>
-                <button onClick={() => redirectItem(item.shortUrl)}>ir direto para o link</button>
+                <button onClick={() => openRedirectUrl(item.shortUrl)}>ir direto para o link</button>
                 <button onClick={() => removeItem(item.id)}>remover</button>
         </ProductBox>
     )

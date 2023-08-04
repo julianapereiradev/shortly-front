@@ -3,7 +3,8 @@ export const pages = {
     signUp: '/cadastro',
     home: '/home',
     urlItem: '/urlId/',
-    ranking: '/'
+    ranking: '/',
+    redirect: '/redirect/'
 }
 
 const API_URL = 'http://localhost:5000';
