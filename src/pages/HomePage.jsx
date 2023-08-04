@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { validateUser } from "../constants/functions";
@@ -9,14 +9,13 @@ import { ThreeDots } from "react-loader-spinner";
 import UrlItem from "../components/UrlItem";
 import Header from "../components/Header";
 
-
 export default function HomePage() {
   const { user, setUser, userName, setUserName } = useContext(AuthContext);
   console.log("user em HomePage", user);
   const navigate = useNavigate();
 
   const [myurls, setMyUrls] = useState(undefined);
-  const [extendUrl, setExtendUrl] = useState('');
+  const [extendUrl, setExtendUrl] = useState("");
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
@@ -26,11 +25,11 @@ export default function HomePage() {
       .get(requisitions.getUserMe, headersAuth(user.token))
       .then((res) => {
         setMyUrls(res.data);
-        setUserName(res.data.name)
+        setUserName(res.data.name);
       })
       .catch((erro) => {
         navigate(pages.signIn);
-         alert(erro.response.data.message)
+        alert(erro.response.data.message);
       });
   }, [user]);
 
@@ -38,29 +37,28 @@ export default function HomePage() {
     e.preventDefault();
     setDisable(true);
 
-    const informations = { url: extendUrl }
+    const informations = { url: extendUrl };
 
-    axios.post(requisitions.postUrl, informations, headersAuth(user.token))
-        .then(resp => {
-            console.log(resp.data)
-            window.location.reload();
-            setDisable(false);
-        })
-        .catch(error => {
-            alert(error.response.data);
-            setDisable(false);
-        })
-}
-  
+    axios
+      .post(requisitions.postUrl, informations, headersAuth(user.token))
+      .then((resp) => {
+        console.log(resp.data);
+        window.location.reload();
+        setDisable(false);
+      })
+      .catch((error) => {
+        alert(error.response.data);
+        setDisable(false);
+      });
+  }
 
   return (
-    <HomeContainer>
+    <>
       <Header />
-        <h1>Pagina Inicial</h1>
-        <h1>Bem vindo {userName}</h1>
-        <InputStyle>
-           <h1>ADD URL:</h1>
-           <input
+      <HomeContainer>
+        <HomeBox>
+          <PostUrlBox>
+            <input
               size={30}
               type="url"
               autoComplete="url"
@@ -71,20 +69,63 @@ export default function HomePage() {
               onChange={(e) => setExtendUrl(e.target.value)}
             />
             <button onClick={postUrlLink}>Encurtar link</button>
-        </InputStyle>
-        <div>
-          {myurls ? (myurls.shortenedUrls.map(item => <UrlItem key={item.id} item={item} />)) : (
-            <ThreeDots type="ThreeDots" color="#F6E4C4" height={90} width={150} />
-          )}
-          </div>
+          </PostUrlBox>
 
-    </HomeContainer>
-  )
+          <div>
+            {myurls ? (
+              myurls.shortenedUrls.map((item) => (
+                <UrlItem key={item.id} item={item} />
+              ))
+            ) : (
+              <ThreeDots
+                type="ThreeDots"
+                color="#000000"
+                height={90}
+                width={150}
+              />
+            )}
+          </div>
+        </HomeBox>
+      </HomeContainer>
+    </>
+  );
 }
 
 const HomeContainer = styled.div`
-  height: 100vh;
-`
-const InputStyle = styled.div`
-  border: 3px solid blue;
-`
+  /* border: 1px solid yellow; */
+`;
+
+const HomeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 50px;
+`;
+
+const PostUrlBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+
+  input {
+    width: 100%;
+    height: 60px;
+    border-radius: 12px;
+    border: 1px solid rgb(120, 177, 89, 25%);
+    box-shadow: rgba(156, 156, 156, 0.2) 0px 7px 29px 0px;
+    padding-left: 10px;
+    font-weight: 500;
+  }
+
+  button {
+    height: 60px;
+    width: 200px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #5D9040;
+    margin-left: 40px;
+  }
+`;

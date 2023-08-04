@@ -46,26 +46,77 @@ export default function UrlItem({ item }) {
     }
 
     return (
+        <>
         <ProductBox>
-            <TextBox onClick={() => openUrlId(item.id)}>
-                <div>idddd: {item.id}</div>
-                <div>shortUrl: {item.shortUrl}</div>
-                <div>url: {item.url}</div> 
-                <div>visitCount: {item.visitCount}</div>
-            </TextBox>
-                <button onClick={() => openRedirectUrl(item.shortUrl)}>ir direto para o link</button>
-                {/* <button onClick={() => redirectItem(item.shortUrl)}>irr direto para o link</button> */}
-                <button onClick={() => removeItem(item.id)}>remover</button>
+            <ItemUrlBox onClick={() => openUrlId(item.id)}>
+                <div>{item.url}</div> 
+                <div>{item.shortUrl}</div>
+                <div>Quantidade de visitantes: {item.visitCount}</div>
+            </ItemUrlBox>
+            <ButtonsBox>
+             <DeleteIcon onClick={() => removeItem(item.id)}><ion-icon name="trash-outline"></ion-icon></DeleteIcon>
+            <RedirectIcon onClick={() => openRedirectUrl(item.shortUrl)}><ion-icon name="paper-plane-outline"></ion-icon></RedirectIcon>
+            </ButtonsBox>
+           
+            
+            {/* <button onClick={() => redirectItem(item.shortUrl)}>irr direto para o link</button> */}
         </ProductBox>
+        </>
     )
 }
 
 const ProductBox = styled.div`
 border: 1px solid black;
-margin-bottom: 25px;
+margin-bottom: 30px;
+display: flex;
+flex-direction: row;
+    height: 60px;
+    border-radius: 12px;
+    border: 1px solid rgb(120, 177, 89, 25%);
+    box-shadow: rgba(156, 156, 156, 0.2) 0px 7px 29px 0px;
+    font-weight: 500;
 `
 
-const TextBox = styled.div`
-    font-size: 4.0vw;
-border: 1px solid red;
+const ItemUrlBox = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+background-color: #80CC74;
+border-top-left-radius: 12px;
+border-bottom-left-radius: 12px;
+width: 90%;
+padding-left: 10px;
+padding-right: 30px;
+cursor: pointer;
+color: #fff;
+font-weight: 500;
+
+`
+
+const ButtonsBox = styled.div`
+width: 10%;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+`
+
+const DeleteIcon = styled.div`
+  cursor: pointer;
+  margin-right: 30px;
+
+  ion-icon {
+    font-size: 26px;
+    color: #EA4F4F;
+  }
+`
+const RedirectIcon = styled.div`
+  cursor: pointer;
+
+ion-icon {
+  font-size: 26px;
+  color: #3b53da;
+}
+
 `
