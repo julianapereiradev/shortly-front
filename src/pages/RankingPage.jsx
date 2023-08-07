@@ -7,7 +7,7 @@ import RankingNotLogged from "../components/RankingNotLogged"
 
 export default function RankingPage() {
 
-    const { user, setUser, userName, setUserName } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     
     return (
         <div>

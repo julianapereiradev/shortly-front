@@ -30,7 +30,6 @@ export default function RankingTable() {
     }
   }, [ranking]);
 
-  console.log("RANKING AQUI:", ranking);
 
   return (
     <>

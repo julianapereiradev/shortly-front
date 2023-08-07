@@ -8,11 +8,11 @@ import AuthContext from "./contexts/AuthContext";
 import { useState } from "react";
 import UrlPage from "./pages/UrlPage";
 import RankingPage from "./pages/RankingPage";
-import RedirectUrlPage from "./pages/RedirectUrlPage";
 
 export default function App() {
   const [user, setUser] = useState(0)
   const [userName, setUserName] = useState(0);
+  
   return (
     <PagesContainer>
       <AuthContext.Provider value={{user, setUser, userName, setUserName}}>
@@ -22,7 +22,6 @@ export default function App() {
       <Route path={pages.signUp} element={ <SignUpPage />} />
       <Route path={pages.home} element={ <HomePage />} />
       <Route path={pages.urlItem + ':id'} element={ <UrlPage />} />
-      <Route path={pages.redirect + ':shortUrl'} element={ <RedirectUrlPage />} />
       <Route path={pages.ranking} element={ <RankingPage />} />
     </Routes>
     </BrowserRouter>

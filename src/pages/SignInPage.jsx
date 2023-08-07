@@ -9,7 +9,7 @@ import Header from "../components/Header";
 
 export default function SignInPage() {
 
-  const {user, setUser} = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext)
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -86,7 +86,6 @@ const SingInContainer = styled.div`
 `
 
 const SingInBox = styled.form`
-  /* border: 3px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: center;

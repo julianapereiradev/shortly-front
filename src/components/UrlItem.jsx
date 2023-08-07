@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components"
 import { headersAuth, pages, requisitions } from "../routes/routes";
 import axios from "axios";
@@ -6,23 +6,14 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/AuthContext";
 
 export default function UrlItem({ item, onRedirect }) {
-    const { user, setUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [redirectUrl, setRedirectUrl] = useState(undefined);
-    const [shouldOpenWindow, setShouldOpenWindow] = useState(false); // New state
+    const [shouldOpenWindow, setShouldOpenWindow] = useState(false);
 
     function openUrlId(urlId) {
         navigate(pages.urlItem + urlId)
-    };
-
-    // function openRedirectUrl(redirect) {
-    //     navigate(pages.redirect + redirect)
-    // };
-
-    // function openRedirectUrl(redirect) {
-    //     window.open(redirect);
-    //   }
-      
+    };    
 
     function redirectItem(shortUrl) {
         axios
@@ -31,26 +22,22 @@ export default function UrlItem({ item, onRedirect }) {
              console.log('resp.request.responseURL em redirecUrlpage', res.request.responseURL);
              setRedirectUrl(res.request.responseURL);
            //Muda para true para que a window seja aberta:
-            setShouldOpenWindow(true);
-
-              // Call the onRedirect function passed as a prop
-            
+            setShouldOpenWindow(true);            
         })
         .catch((erro) => {
-        console.log('errro',erro)
+        console.log('erro aqui:', erro.message)
+        alert(erro.message)
         });
     };
 
-    
+
     useEffect(() => {
         if (shouldOpenWindow && redirectUrl) {
           window.open(redirectUrl);
           onRedirect(redirectUrl);
         }
       }, [shouldOpenWindow, redirectUrl]);
-    
 
-    
 
     async function removeItem(itemId) {
         try {
@@ -72,7 +59,6 @@ export default function UrlItem({ item, onRedirect }) {
             </ItemUrlBox>
             <ButtonsBox>
              <DeleteIcon onClick={() => removeItem(item.id)}><ion-icon name="trash-outline"></ion-icon></DeleteIcon>
-            {/* <RedirectIcon onClick={() => openRedirectUrl(item.shortUrl)}><ion-icon name="paper-plane-outline"></ion-icon></RedirectIcon> */}
             <RedirectIcon onClick={() => redirectItem(item.shortUrl)}><ion-icon name="paper-plane-outline"></ion-icon></RedirectIcon>
 
             </ButtonsBox>

@@ -82,10 +82,8 @@ const DescriptionInfo = styled.div`
 
 
   a {
-    /* Style for visited link */
     color: #5d9040;
 
-    /* Style for visited link on hover */
     &:visited:hover {
       color: #9c9c9c;
     }

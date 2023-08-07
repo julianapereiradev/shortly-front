@@ -5,12 +5,11 @@ import { validateUser } from "../constants/functions";
 import axios from "axios";
 import { headersAuth, pages, requisitions } from "../routes/routes";
 import { useNavigate } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
 import UrlItem from "../components/UrlItem";
 import Header from "../components/Header";
 
 export default function HomePage() {
-  const { user, setUser, userName, setUserName } = useContext(AuthContext);
+  const { user, setUser, setUserName } = useContext(AuthContext);
   console.log("user em HomePage", user);
   const navigate = useNavigate();
 
@@ -29,8 +28,7 @@ export default function HomePage() {
       })
       .catch((erro) => {
         navigate(pages.signIn);
-        // alert(erro.response.data.message);
-        console.log('erro aqui de get:', erro)
+        alert(erro.message);
       });
   }, [user]);
 
@@ -54,12 +52,7 @@ export default function HomePage() {
       });
   }
 
-
-  function handleRedirect(url) {
-    // Handle the redirection here, you might want to update a state
-    // or perform other actions in response to the redirection
-    console.log("Redirecting to:", url);
-    // Refresh the page if needed
+  function handleRedirect() {
     window.location.reload();
 }
 
@@ -87,7 +80,9 @@ export default function HomePage() {
             myurls.shortenedUrls.map((item) => (
                 <UrlItem key={item.id} item={item} onRedirect={handleRedirect} />
             ))
-        ) : ('Você não possui urls')}
+        ) : ( <ContainerText>
+          <div>Você ainda não possui urls cadastradas!</div>
+        </ContainerText>)}
           </div>
         </HomeBox>
       </HomeContainer>
@@ -132,4 +127,13 @@ const PostUrlBox = styled.div`
     background-color: #5D9040;
     margin-left: 40px;
   }
+`;
+
+const ContainerText = styled.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 50px;
+  font-weight: 600;
+  font-size: 30px;
 `;

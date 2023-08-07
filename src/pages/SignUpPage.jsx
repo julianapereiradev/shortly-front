@@ -109,7 +109,6 @@ const SingUpContainer = styled.div`
 `;
 
 const SingUpBox = styled.form`
-  /* border: 3px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: center;
