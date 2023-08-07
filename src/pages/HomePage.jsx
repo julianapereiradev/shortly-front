@@ -54,6 +54,15 @@ export default function HomePage() {
       });
   }
 
+
+  function handleRedirect(url) {
+    // Handle the redirection here, you might want to update a state
+    // or perform other actions in response to the redirection
+    console.log("Redirecting to:", url);
+    // Refresh the page if needed
+    window.location.reload();
+}
+
   return (
     <>
       <Header />
@@ -74,11 +83,11 @@ export default function HomePage() {
           </PostUrlBox>
 
           <div>
-            {myurls ? (
-              myurls.shortenedUrls.map((item) => (
-                <UrlItem key={item.id} item={item} />
-              ))
-            ) : ('Você não possui urls')}
+          {myurls ? (
+            myurls.shortenedUrls.map((item) => (
+                <UrlItem key={item.id} item={item} onRedirect={handleRedirect} />
+            ))
+        ) : ('Você não possui urls')}
           </div>
         </HomeBox>
       </HomeContainer>
