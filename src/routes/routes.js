@@ -7,8 +7,8 @@ export const pages = {
     redirect: '/redirect/'
 }
 
-// const API_URL = 'http://localhost:5000';
-const API_URL = `${process.env.REACT_APP_API_URL}`
+const API_URL = 'http://localhost:5000';
+// const API_URL = `${process.env.REACT_APP_API_URL}`
 
 export const requisitions = {
     postSignUp: API_URL + '/signup',
